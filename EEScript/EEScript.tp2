@@ -1,0 +1,13 @@
+// 2022-10-19
+// + Create git: https://github.com/hybridgame/EEScript
+
+BACKUP ~EEScript/backup~
+AUTHOR ~hybridgame~
+VERSION "2022.10.19"
+
+LANGUAGE ~Korean~  ~Korean~ ~EEScript/Language/setupko.tra~
+
+BEGIN "EEScript 2022-10-19"
+
+COMPILE ~EEScript/baf/EEScript.baf~ 
+COPY_EXISTING ~override/EEScript.bcs~ ~scripts/EEScript.bs~
