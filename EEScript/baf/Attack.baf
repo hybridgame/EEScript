@@ -14,7 +14,7 @@ IF
 	True()
 THEN
 	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",0)
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 		Continue()
 END
 
@@ -44,12 +44,25 @@ IF
 	!InParty(LastSeenBy(Myself))
 THEN
 	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",1)
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_WARRIOR%)
 		Continue()
 END
 
 IF
-	Global("ES_ENEMY","LOCALS",1)
+	OR(4)
+		Class(LastSeenBy(Myself),MAGE_ALL)
+		Class(LastSeenBy(Myself),DRUID_ALL)
+		Class(LastSeenBy(Myself),BARD_ALL)
+		Class(LastSeenBy(Myself),CLERIC_ALL)
+	!InParty(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_CASTER%)
+		Continue()
+END
+
+IF
+	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 THEN
 	RESPONSE #100
@@ -57,7 +70,7 @@ THEN
 END
 
 IF
-	Global("ES_ENEMY","LOCALS",1)
+	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
     !Range(LastSeenBy(Myself),8)
 	CanEquipRanged()
 THEN
@@ -67,7 +80,7 @@ THEN
 END
 
 IF
-	Global("ES_ENEMY","LOCALS",1)
+	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 THEN
 	RESPONSE #100
         EquipMostDamagingMelee()

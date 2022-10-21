@@ -3,15 +3,11 @@
 
 BACKUP ~EEScript/backup~
 AUTHOR ~hybridgame~
-VERSION "2022.10.19"
+VERSION "2022.10.21"
 
 LANGUAGE ~Korean~  ~Korean~ ~EEScript/Language/setupko.tra~
 
 BEGIN "EEScript 2022-10-19"
-
-//  Shout
-//      Move- 911
-//      Trap- 912
 
 // Disarm trap automatically
 INCLUDE ~EEScript/trap/trap.tph~
@@ -40,6 +36,9 @@ BEGIN
         SPRINT  COMBAT_ON       "1"
         SPRINT  SHOUT_MOVE      "911"
         SPRINT  SHOUT_TRAP      "912"
+        SPRINT  ENEMY_NONE      "0"
+        SPRINT  ENEMY_WARRIOR   "1"
+        SPRINT  ENEMY_CASTER    "2"
         EVALUATE_BUFFER
 END
 COPY_EXISTING ~override/EEScript.bcs~ ~scripts/EEScript.bs~
