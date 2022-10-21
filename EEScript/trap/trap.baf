@@ -1,0 +1,34 @@
+IF
+	!Global("EE_%trap%_INIT","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetGlobal("EE_%trap%_INIT","GLOBAL",1)
+		SetGlobal("EE_%trap%_DETECTED","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Detected([ANYONE])
+	Global("EE_%trap%_DETECTED","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("EE_%trap%_DETECTED","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("EE_%trap%_DETECTED","GLOBAL",1)
+THEN
+	RESPONSE #100
+		Shout(912)
+		Continue()
+END
+
+IF
+	OR(2)
+		Disarmed([ANYONE])
+		Entered([ANYONE])
+THEN
+	RESPONSE #100
+		SetGlobal("EE_%trap%_DETECTED","GLOBAL",0)
+END

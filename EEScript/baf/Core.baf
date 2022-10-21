@@ -1,0 +1,184 @@
+///////////////////////////////////////////////////////////////////////////////
+// 적과 마주치면 그전에 하던 모든 행동을 멈추고 파티에 알린다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+    See(NearestEnemyOf(Myself))
+    Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+    Global("ES_MODE","LOCALS",%MODE_MELEE%)
+THEN
+	RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
+        EquipMostDamagingMelee()
+		ClearActions(Myself)
+		Continue()
+END
+
+IF
+    See(NearestEnemyOf(Myself))
+    Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+    Global("ES_MODE","LOCALS",%MODE_RANGE%)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
+        EquipRanged()
+		ClearActions(Myself)
+		Continue()
+END
+
+IF
+    See(NearestEnemyOf(Myself))
+    Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+THEN
+	RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
+		ClearActions(Myself)
+		Continue()
+END
+
+IF
+    CombatCounter(0)
+    !See(NearestEnemyOf(Myself))
+    Global("ES_COMBAT","LOCALS",%COMBAT_ON%)
+THEN
+    RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("ES_SHOUT_TIMER","LOCALS")
+	See(NearestEnemyOf(Myself))
+	CheckStatLT(Myself,1,SANCTUARY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+THEN
+	RESPONSE #100
+		GlobalShout(%SHOUT_MOVE%)
+		SetGlobalTimer("ES_SHOUT_TIMER","LOCALS",TWO_ROUNDS)
+		Continue()
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 캐릭터를 직접 조정 중이면 여기까지만 작동한다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	!ActionListEmpty()
+THEN
+	RESPONSE #100
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 전투중인데 적이 보이지 않으면 적을 보고있는 파티원에게 이동한다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	Heard([GOODCUTOFF],%SHOUT_MOVE%)
+	!See(NearestEnemyOf(Myself))
+	!CombatCounter(0)
+	!ModalState(SHAMANDANCE)
+THEN
+	RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		MoveToObject(LastHeardBy(Myself))
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 전투 여부에 상관없이 항상 하는 행동
+///////////////////////////////////////////////////////////////////////////////
+
+// 턴 언데드
+IF
+	Global("ES_ACT","LOCALS",%ACT_TURN%)
+	!ModalState(TURNUNDEAD)
+THEN
+	RESPONSE #100
+		Turn()
+END
+
+// 바드 송
+IF
+	Global("ES_ACT","LOCALS",%ACT_SONG%)
+	!ModalState(BATTLESONG)
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+// 샤먼 댄스
+IF
+	Global("ES_ACT","LOCALS",%ACT_DANCE%)
+	!ModalState(SHAMANDANCE)
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+// 환상 탐지
+IF
+	Global("ES_ACT","LOCALS",%ACT_DETECT%)
+	!ModalState(DETECTTRAPS)
+THEN
+	RESPONSE #100
+		FindTraps()
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 적이 없을 때 하는 행동
+///////////////////////////////////////////////////////////////////////////////
+
+// 함정 해제
+IF
+	Heard([ANYTHING],%SHOUT_TRAP%)
+	Class(Myself,THIEF_ALL)
+	!ButtonDisabled(BUTTON_THIEVING)
+	!Detect([ENEMY])
+	Range(LastHeardBy(Myself),10)
+THEN
+	RESPONSE #100
+		RemoveTraps(LastHeardBy(Myself))
+END
+
+// 몽크, 씨프, 샤먼 함정 찾기
+IF
+	OR(3)
+		Class(Myself,THIEF_ALL)
+		Class(Myself,MONK)
+        Class(Myself,SHAMAN)
+	Global("ES_ACT","LOCALS",%ACT_FIND%)
+    !Detect([ENEMY])
+	!ModalState(DETECTTRAPS)
+THEN
+	RESPONSE #100
+		FindTraps()
+END
+
+// 레인저, 몽크, 씨프 그림자 숨기
+IF
+	Global("ES_ACT","LOCALS",%ACT_HIDE%)
+	!GlobalTimerNotExpired("EC#HIDE","LOCALS")
+	!ButtonDisabled(BUTTON_STEALTH)
+	!Detect([ENEMY])
+	!ModalState(STEALTH)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("EC#HIDE","LOCALS",ONE_ROUND)
+		Hide()
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 적이 없거나 성역, 투명화, 샤먼 댄스, 바드 송, 턴 언데드 중이면 중지한다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	OR(6)
+		!Detect([ENEMY])
+		CheckStatGT(Myself,0,SANCTUARY)
+		StateCheck(Myself,STATE_INVISIBLE)
+		ModalState(SHAMANDANCE)
+		ModalState(BATTLESONG)
+		ModalState(TURNUNDEAD)
+THEN
+	RESPONSE #100
+END

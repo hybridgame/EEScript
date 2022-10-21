@@ -9,5 +9,37 @@ LANGUAGE ~Korean~  ~Korean~ ~EEScript/Language/setupko.tra~
 
 BEGIN "EEScript 2022-10-19"
 
-COMPILE ~EEScript/baf/EEScript.baf~ 
+//  Shout
+//      Move- 911
+//      Trap- 912
+
+// Disarm trap automatically
+INCLUDE ~EEScript/trap/trap.tph~
+
+// EEScript
+COMPILE ~EEScript/baf/EEScript.baf~
+ACTION_FOR_EACH file IN
+    Hotkey
+    Core
+    Attack
+BEGIN
+    EXTEND_BOTTOM ~EEScript.bcs~ ~EEScript/baf/%file%.baf~
+        SPRINT  AI_ON           "0"
+        SPRINT  AI_OFF          "1"
+        SPRINT  MODE_MELEE      "0"
+        SPRINT  MODE_RANGE      "1"
+        SPRINT  MODE_MIXED      "2"
+        SPRINT  ACT_NONE        "0"
+        SPRINT  ACT_FIND        "0"
+        SPRINT  ACT_HIDE        "1"
+        SPRINT  ACT_TURN        "2"
+        SPRINT  ACT_SONG        "3"
+        SPRINT  ACT_DANCE       "4"
+        SPRINT  ACT_DETECT      "5"
+        SPRINT  COMBAT_OFF      "0"
+        SPRINT  COMBAT_ON       "1"
+        SPRINT  SHOUT_MOVE      "911"
+        SPRINT  SHOUT_TRAP      "912"
+        EVALUATE_BUFFER
+END
 COPY_EXISTING ~override/EEScript.bcs~ ~scripts/EEScript.bs~

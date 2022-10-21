@@ -1,0 +1,75 @@
+///////////////////////////////////////////////////////////////////////////////
+// 주문 시전을 하는 적부터 공격
+///////////////////////////////////////////////////////////////////////////////
+
+// 원거리 모드인데 원거리 무기가 슬롯에 없으면 공격을 하지 않는다.
+IF
+	Global("ES_MODE","LOCALS",%MODE_RANGE%)
+	!CanEquipRanged()
+THEN
+	RESPONSE #100
+END
+
+IF
+	True()
+THEN
+	RESPONSE #100
+		SetGlobal("ES_ENEMY","LOCALS",0)
+		Continue()
+END
+
+IF
+	OR(21)
+		See(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(SecondNearestEnemyOfType([0.0.0.DRUID_ALL]))
+		See(SecondNearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(SecondNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(ThirdNearestEnemyOfType([0.0.0.DRUID_ALL]))
+        See(ThirdNearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(ThirdNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(FourthNearestEnemyOfType([0.0.0.DRUID_ALL]))
+        See(FourthNearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(FourthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(FifthNearestEnemyOfType([0.0.0.DRUID_ALL]))
+        See(FifthNearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(FifthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(SixthNearestEnemyOfType([0.0.0.DRUID_ALL]))
+        See(SixthNearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(SixthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+        See(NearestEnemyOf(Myself))
+	!InParty(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_ENEMY","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("ES_ENEMY","LOCALS",1)
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	Global("ES_ENEMY","LOCALS",1)
+    !Range(LastSeenBy(Myself),8)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        EquipRanged()
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	Global("ES_ENEMY","LOCALS",1)
+THEN
+	RESPONSE #100
+        EquipMostDamagingMelee()
+		AttackReevaluate(LastSeenBy(Myself),30)
+END

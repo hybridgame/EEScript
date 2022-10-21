@@ -1,0 +1,239 @@
+///////////////////////////////////////////////////////////////////////////////
+// 	스크립트 시작시 상태 출력
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	OnCreation()
+	Global("ES_AI","LOCALS",%AI_ON%)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("EC#HIDE","LOCALS",1)
+		DisplayStringHead(Myself,@10)   // AI 켬
+		Continue()
+END
+
+IF
+	OnCreation()
+	Global("ES_AI","LOCALS",%AI_OFF%)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("EC#HIDE","LOCALS",1)
+		DisplayStringHead(Myself,@11)   // AI 끔
+		Continue()
+END
+
+IF
+	OnCreation()
+	Global("ES_MODE","LOCALS",%MODE_RANGE%)
+	!CanEquipRanged()
+THEN
+	RESPONSE #100
+        DisplayStringHead(Myself,@23)   // 무기 슬롯에 원거리 무기 필요
+		Continue()
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 인공지능을 끄고 키는 핫키
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	HotKey(V)
+	!Global("ES_AI","LOCALS",%AI_ON%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@10)	// AI 켬
+		SetGlobal("ES_AI","LOCALS",%AI_ON%)
+		Continue()
+END
+
+IF
+	HotKey(V)
+	!Global("ES_AI","LOCALS",%AI_OFF%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@11)   // AI 끔
+		SetGlobal("ES_AI","LOCALS",%AI_OFF%)
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 인공지능이 꺼져 있으면 여기까지만 작동한다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	Global("ES_AI","LOCALS",%AI_OFF%)
+THEN
+	RESPONSE #100
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 전투 모드 지정 핫키
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	HotKey(N)
+	Global("ES_MODE","LOCALS",%MODE_MELEE%)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        DisplayStringHead(Myself,@21)   // 원거리 모드
+		EquipRanged()
+		SetGlobal("ES_MODE","LOCALS",%MODE_RANGE%)
+END
+
+IF
+	HotKey(N)
+	Global("ES_MODE","LOCALS",%MODE_MELEE%)
+	!CanEquipRanged()
+THEN
+	RESPONSE #100
+        DisplayStringHead(Myself,@23)   // 무기 슬롯에 원거리 무기 필요
+		SetGlobal("ES_MODE","LOCALS",%MODE_RANGE%)
+END
+
+IF
+	HotKey(N)
+	Global("ES_MODE","LOCALS",%MODE_RANGE%)
+THEN
+	RESPONSE #100
+        DisplayStringHead(Myself,@22)   // 혼합 모드
+		SetGlobal("ES_MODE","LOCALS",%MODE_MIXED%)
+END
+
+IF
+	HotKey(N)
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+THEN
+	RESPONSE #100
+        DisplayStringHead(Myself,@20)   // 근거리 모드
+		EquipMostDamagingMelee()
+		SetGlobal("ES_MODE","LOCALS",%MODE_MELEE%)
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 해야할 행동 지정 핫키
+///////////////////////////////////////////////////////////////////////////////
+
+// 모든 시프, 몽크
+IF
+	HotKey(B)
+	OR(2)
+		Class(Myself,THIEF_ALL)
+		Class(Myself,MONK)
+	Global("ES_ACT","LOCALS",%ACT_FIND%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@31)
+		SetGlobal("ES_ACT","LOCALS",%ACT_HIDE%)
+END
+
+IF
+	HotKey(B)
+	Class(Myself,THIEF_ALL)
+	Global("ES_ACT","LOCALS",%ACT_HIDE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@35)
+		SetGlobal("ES_ACT","LOCALS",%ACT_DETECT%)
+END
+
+IF
+	HotKey(B)
+	Class(Myself,CLERIC_THIEF)
+	!ButtonDisabled(BUTTON_TURNUNDEAD)
+	Global("ES_ACT","LOCALS",%ACT_DETECT%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@32)
+		SetGlobal("ES_ACT","LOCALS",%ACT_TURN%)
+END
+
+// 모든 레인저
+IF
+	HotKey(B)
+	Class(Myself,RANGER_ALL)
+	Global("ES_ACT","LOCALS",%ACT_NONE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@31)
+		SetGlobal("ES_ACT","LOCALS",%ACT_HIDE%)
+END
+
+IF
+	HotKey(B)
+	Class(Myself,CLERIC_RANGER)
+	!ButtonDisabled(BUTTON_TURNUNDEAD)
+	Global("ES_ACT","LOCALS",%ACT_HIDE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@32)
+		SetGlobal("ES_ACT","LOCALS",%ACT_TURN%)
+END
+
+// 팔라딘, 모든 클레릭
+IF
+	HotKey(B)
+	OR(2)
+		Class(Myself,PALADIN_ALL)
+		Class(Myself,CLERIC_ALL)
+	!ButtonDisabled(BUTTON_TURNUNDEAD)
+	Global("ES_ACT","LOCALS",%ACT_NONE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@32)
+		SetGlobal("ES_ACT","LOCALS",%ACT_TURN%)
+END
+
+// 바드
+IF
+	HotKey(B)
+	Class(Myself,BARD_ALL)
+	!ButtonDisabled(BUTTON_BATTLESONG)
+	Global("ES_ACT","LOCALS",%ACT_NONE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@33)
+		SetGlobal("ES_ACT","LOCALS",%ACT_SONG%)
+END
+
+// 샤먼
+IF
+	HotKey(B)
+	Class(Myself,SHAMAN)
+	!ButtonDisabled(BUTTON_BATTLESONG)
+	Global("ES_ACT","LOCALS",%ACT_FIND%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@34)
+		SetGlobal("ES_ACT","LOCALS",%ACT_DANCE%)
+END
+
+IF
+	HotKey(B)
+	Class(Myself,SHAMAN)
+	Global("ES_ACT","LOCALS",%ACT_DANCE%)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@35)
+		SetGlobal("ES_ACT","LOCALS",%ACT_DETECT%)
+END
+
+// 기본 행동
+IF
+	HotKey(B)
+	OR(3)
+		Class(Myself,THIEF_ALL)
+		Class(Myself,MONK)
+		Class(Myself,SHAMAN)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@36)
+		SetGlobal("ES_ACT","LOCALS",%ACT_FIND%)
+END
+
+IF
+	HotKey(B)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@30)
+		SetGlobal("ES_ACT","LOCALS",%ACT_NONE%)
+END
