@@ -2,6 +2,7 @@
 //
 // * 모든 추가 문자열 제거 (다이얼로그 수정 없음)
 // * 자동 함정 해제 패치
+// + 스크립트에서 사용하는 모든 문자열을 변수로 정의 후 사용
 //
 // 2022-10-19
 // + Create git: https://github.com/hybridgame/EEScript
@@ -24,6 +25,18 @@ ACTION_FOR_EACH file IN
     Attack
 BEGIN
     EXTEND_BOTTOM ~EEScript.bcs~ ~EEScript/baf/%file%.baf~
+        SPRINT  S_AI_ON         "14669"
+        SPRINT  S_AI_OFF        "14671"
+        SPRINT  S_MODE_MELEE    "15529"
+        SPRINT  S_MODE_RANGE    "11767"
+        SPRINT  S_MODE_MIXED    "16465"
+        SPRINT  S_MODE_DISABLE  "17159"
+        SPRINT  S_ACT_NONE      "13727"
+        SPRINT  S_ACT_FIND      "11985"
+        SPRINT  S_ACT_HIDE      "11984"
+        SPRINT  S_ACT_TURN      "16466"
+        SPRINT  S_ACT_SONG      "11798"
+        SPRINT  S_ACT_DETECT    "12042"
         SPRINT  AI_ON           "0"
         SPRINT  AI_OFF          "1"
         SPRINT  MODE_MELEE      "0"
