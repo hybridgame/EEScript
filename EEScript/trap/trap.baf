@@ -1,23 +1,21 @@
 IF
-	!Global("ES_%BCS%_INIT","GLOBAL",1)
+	!Global("ES_%BCS%_INIT","MYAREA",1)
 THEN
 	RESPONSE #100
-		SetGlobal("ES_%BCS%_INIT","GLOBAL",1)
-		SetGlobal("ES_%BCS%","GLOBAL",%TRAP_NONE%)
-		Continue()
+		SetGlobal("ES_%BCS%_INIT","MYAREA",1)
+		SetGlobal("ES_%BCS%","MYAREA",0)
 END
 
 IF
 	Detected([ANYONE])
-	Global("ES_%BCS%","GLOBAL",%TRAP_NONE%)
 THEN
 	RESPONSE #100
-		SetGlobal("ES_%BCS%","GLOBAL",%TRAP_DETECTED%)
+		IncrementGlobal("ES_%BCS%","MYAREA",1)
 		Continue()
 END
 
 IF
-	Global("ES_%BCS%","GLOBAL",%TRAP_DETECTED%)
+	!Global("ES_%BCS%","MYAREA",0)
 THEN
 	RESPONSE #100
 		Shout(%SHOUT_TRAP%)
@@ -30,5 +28,5 @@ IF
 		Entered([ANYONE])
 THEN
 	RESPONSE #100
-		SetGlobal("ES_%BCS%","GLOBAL",%TRAP_NONE%)
+		IncrementGlobal("ES_%BCS%","MYAREA",-1)
 END

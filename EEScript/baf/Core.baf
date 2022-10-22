@@ -134,7 +134,7 @@ IF
 	Class(Myself,THIEF_ALL)
 	!ButtonDisabled(BUTTON_THIEVING)
 	!Detect([ENEMY])
-	Range(LastHeardBy(Myself),10)
+	Range(LastHeardBy(Myself),7)
 THEN
 	RESPONSE #100
 		RemoveTraps(LastHeardBy(Myself))

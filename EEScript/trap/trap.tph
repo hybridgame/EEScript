@@ -119,8 +119,6 @@ BEGIN
             EXTEND_TOP ~%file%.bcs~ ~EEScript/trap/trap.baf~
                 SPRINT  BCS             ~%file%~
                 SPRINT  SHOUT_TRAP      "912"
-                SPRINT  TRAP_NONE       "0"
-                SPRINT  TRAP_DETECTED   "1"
                 EVALUATE_BUFFER
         END
     END
@@ -249,8 +247,6 @@ BEGIN
             EXTEND_TOP ~%file%.bcs~ ~EEScript/trap/trap.baf~
                 SPRINT  BCS             ~%file%~
                 SPRINT  SHOUT_TRAP      "912"
-                SPRINT  TRAP_NONE       "0"
-                SPRINT  TRAP_DETECTED   "1"
                 EVALUATE_BUFFER
         END
     END

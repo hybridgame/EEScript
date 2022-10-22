@@ -1,13 +1,17 @@
+// 2022-10-22
+//
+// * 모든 추가 문자열 제거 (다이얼로그 수정 없음)
+// * 자동 함정 해제 패치
+//
 // 2022-10-19
 // + Create git: https://github.com/hybridgame/EEScript
 
 BACKUP ~EEScript/backup~
 AUTHOR ~hybridgame~
-VERSION "2022.10.21"
+VERSION "2022.10.22"
 
-LANGUAGE ~Korean~  ~Korean~ ~EEScript/Language/setupko.tra~
-
-BEGIN "EEScript 2022-10-19"
+BEGIN "EEScript 2022-10-22"
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ ~BGEE or BG2EE Required~
 
 // Disarm trap automatically
 INCLUDE ~EEScript/trap/trap.tph~
