@@ -172,13 +172,14 @@ END
 ///////////////////////////////////////////////////////////////////////////////
 
 IF
-	OR(6)
+	OR(7)
 		!Detect([ENEMY])
 		CheckStatGT(Myself,0,SANCTUARY)
 		StateCheck(Myself,STATE_INVISIBLE)
 		ModalState(SHAMANDANCE)
 		ModalState(BATTLESONG)
 		ModalState(TURNUNDEAD)
+		ModalState(STEALTH)
 THEN
 	RESPONSE #100
 END

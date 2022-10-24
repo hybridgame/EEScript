@@ -29,4 +29,5 @@ IF
 THEN
 	RESPONSE #100
 		IncrementGlobal("ES_%BCS%","MYAREA",-1)
+		Continue()
 END
