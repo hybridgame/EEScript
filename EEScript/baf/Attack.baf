@@ -3,7 +3,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 IF
-	!See(NearestEnemyOf(Myself))
+	OR(2)
+		!See(NearestEnemyOf(Myself))
+		InParty(NearestEnemyOf(Myself))
 THEN
 	RESPONSE #100
 END
@@ -16,8 +18,21 @@ THEN
 	RESPONSE #100
 END
 
+// 적을 식별한다.
 IF
-	OR(21)
+	True()
+THEN
+	RESPONSE #100
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
+		Continue()
+END
+
+IF
+	OR(24)
+		See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
+		See(NearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
 		See(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]))
         See(SecondNearestEnemyOfType([0.0.0.DRUID_ALL]))
 		See(SecondNearestEnemyOfType([0.0.0.BARD_ALL]))
@@ -38,20 +53,6 @@ IF
         See(SixthNearestEnemyOfType([0.0.0.DRUID_ALL]))
         See(SixthNearestEnemyOfType([0.0.0.BARD_ALL]))
 		See(SixthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
-        See(NearestEnemyOf(Myself))
-	!InParty(LastSeenBy(Myself))
-THEN
-	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_WARRIOR%)
-		Continue()
-END
-
-IF
-	OR(4)
-		Class(LastSeenBy(Myself),MAGE_ALL)
-		Class(LastSeenBy(Myself),DRUID_ALL)
-		Class(LastSeenBy(Myself),BARD_ALL)
-		Class(LastSeenBy(Myself),CLERIC_ALL)
 	!InParty(LastSeenBy(Myself))
 THEN
 	RESPONSE #100
@@ -60,13 +61,23 @@ THEN
 END
 
 IF
+	Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
+	See(NearestEnemyOf(Myself))
+	!InParty(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_WARRIOR%)
+		Continue()
+END
+
+// 적을 공격한다.
+IF
 	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 	!InParty(LastSeenBy(Myself))
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 THEN
 	RESPONSE #100
 		AttackReevaluate(LastSeenBy(Myself),30)
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END
 
 IF
@@ -78,7 +89,6 @@ THEN
 	RESPONSE #100
         EquipRanged()
 		AttackReevaluate(LastSeenBy(Myself),30)
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END
 
 IF
@@ -88,5 +98,4 @@ THEN
 	RESPONSE #100
         EquipMostDamagingMelee()
 		AttackReevaluate(LastSeenBy(Myself),30)
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END
