@@ -2,20 +2,18 @@
 // 주문 시전을 하는 적부터 공격
 ///////////////////////////////////////////////////////////////////////////////
 
+IF
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+END
+
 // 원거리 모드인데 원거리 무기가 슬롯에 없으면 공격을 하지 않는다.
 IF
 	Global("ES_MODE","LOCALS",%MODE_RANGE%)
 	!CanEquipRanged()
 THEN
 	RESPONSE #100
-END
-
-IF
-	True()
-THEN
-	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-		Continue()
 END
 
 IF
@@ -63,26 +61,32 @@ END
 
 IF
 	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
+	!InParty(LastSeenBy(Myself))
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 THEN
 	RESPONSE #100
 		AttackReevaluate(LastSeenBy(Myself),30)
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END
 
 IF
 	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
+	!InParty(LastSeenBy(Myself))
     !Range(LastSeenBy(Myself),8)
 	CanEquipRanged()
 THEN
 	RESPONSE #100
         EquipRanged()
 		AttackReevaluate(LastSeenBy(Myself),30)
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END
 
 IF
 	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
+	!InParty(LastSeenBy(Myself))
 THEN
 	RESPONSE #100
         EquipMostDamagingMelee()
 		AttackReevaluate(LastSeenBy(Myself),30)
+		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
 END

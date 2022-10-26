@@ -1,3 +1,7 @@
+// 2022-10-26
+//
+// * 아군 공격 방지
+//
 // 2022-10-22
 //
 // * 모든 추가 문자열 제거 (다이얼로그 수정 없음)
@@ -9,9 +13,9 @@
 
 BACKUP ~EEScript/backup~
 AUTHOR ~hybridgame~
-VERSION "2022.10.22"
+VERSION "2022.10.24"
 
-BEGIN "EEScript 2022-10-22"
+BEGIN "EEScript 2022-10-24"
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ ~BGEE or BG2EE Required~
 
 // Disarm trap automatically
