@@ -6,6 +6,10 @@ IF
     See(NearestEnemyOf(Myself))
     Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
     Global("ES_MODE","LOCALS",%MODE_MELEE%)
+	!CheckStatGT(Myself,0,SANCTUARY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!ModalState(SHAMANDANCE)
+	!ModalState(STEALTH)
 THEN
 	RESPONSE #100
 		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
@@ -19,6 +23,10 @@ IF
     Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
     Global("ES_MODE","LOCALS",%MODE_RANGE%)
 	CanEquipRanged()
+	!CheckStatGT(Myself,0,SANCTUARY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!ModalState(SHAMANDANCE)
+	!ModalState(STEALTH)
 THEN
 	RESPONSE #100
 		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
@@ -30,10 +38,28 @@ END
 IF
     See(NearestEnemyOf(Myself))
     Global("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+	!CheckStatGT(Myself,0,SANCTUARY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!ModalState(SHAMANDANCE)
+	!ModalState(STEALTH)
 THEN
 	RESPONSE #100
 		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
 		ClearActions(Myself)
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("ES_SHOUT_TIMER","LOCALS")
+	See(NearestEnemyOf(Myself))
+	!CheckStatGT(Myself,0,SANCTUARY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!ModalState(SHAMANDANCE)
+	!ModalState(STEALTH)
+THEN
+	RESPONSE #100
+		GlobalShout(%SHOUT_MOVE%)
+		SetGlobalTimer("ES_SHOUT_TIMER","LOCALS",TWO_ROUNDS)
 		Continue()
 END
 
@@ -44,18 +70,6 @@ IF
 THEN
     RESPONSE #100
 		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
-		Continue()
-END
-
-IF
-	!GlobalTimerNotExpired("ES_SHOUT_TIMER","LOCALS")
-	See(NearestEnemyOf(Myself))
-	CheckStatLT(Myself,1,SANCTUARY)
-	!StateCheck(Myself,STATE_INVISIBLE)
-THEN
-	RESPONSE #100
-		GlobalShout(%SHOUT_MOVE%)
-		SetGlobalTimer("ES_SHOUT_TIMER","LOCALS",TWO_ROUNDS)
 		Continue()
 END
 
