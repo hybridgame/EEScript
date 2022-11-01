@@ -1,16 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 주문 시전을 하는 적부터 공격
+// 적을 공격
 ///////////////////////////////////////////////////////////////////////////////
 
-IF
-	OR(2)
-		!See(NearestEnemyOf(Myself))
-		InParty(NearestEnemyOf(Myself))
-THEN
-	RESPONSE #100
-END
-
-// 원거리 모드인데 원거리 무기가 슬롯에 없으면 공격을 하지 않는다.
+// 원거리 모드인데 원거리 무기가 무기 슬롯에 없으면 공격을 하지 않는다.
 IF
 	Global("ES_MODE","LOCALS",%MODE_RANGE%)
 	!CanEquipRanged()
@@ -18,21 +10,19 @@ THEN
 	RESPONSE #100
 END
 
-// 적을 식별한다.
+// 투명화, 그림자 숨기 중에는 공격을 하지 않는다.
 IF
-	True()
+	OR(2)
+		StateCheck(Myself,STATE_INVISIBLE)
+		ModalState(STEALTH)
 THEN
 	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-		Continue()
 END
 
+// 주문 시전자부터 공격
 IF
-	OR(24)
-		See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
-		See(NearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	OR(21)
 		See(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]))
         See(SecondNearestEnemyOfType([0.0.0.DRUID_ALL]))
 		See(SecondNearestEnemyOfType([0.0.0.BARD_ALL]))
@@ -53,49 +43,32 @@ IF
         See(SixthNearestEnemyOfType([0.0.0.DRUID_ALL]))
         See(SixthNearestEnemyOfType([0.0.0.BARD_ALL]))
 		See(SixthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(NearestEnemyOf(Myself))
 	!InParty(LastSeenBy(Myself))
-THEN
-	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_CASTER%)
-		Continue()
-END
-
-IF
-	Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-	See(NearestEnemyOf(Myself))
-	!InParty(LastSeenBy(Myself))
-THEN
-	RESPONSE #100
-		SetGlobal("ES_ENEMY","LOCALS",%ENEMY_WARRIOR%)
-		Continue()
-END
-
-// 적을 공격한다.
-IF
-	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-	!InParty(LastSeenBy(Myself))
-	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 THEN
 	RESPONSE #100
 		AttackReevaluate(LastSeenBy(Myself),30)
 END
 
+// 거리에 따라 무기 교체하며 공격
 IF
-	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-	!InParty(LastSeenBy(Myself))
-    !Range(LastSeenBy(Myself),8)
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	See(NearestEnemyOf(Myself))
+	!InParty(NearestEnemyOf(Myself))
+    !Range(NearestEnemyOf(Myself),8)
 	CanEquipRanged()
 THEN
 	RESPONSE #100
         EquipRanged()
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(NearestEnemyOf(Myself),30)
 END
 
 IF
-	!Global("ES_ENEMY","LOCALS",%ENEMY_NONE%)
-	!InParty(LastSeenBy(Myself))
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	See(NearestEnemyOf(Myself))
+	!InParty(NearestEnemyOf(Myself))
 THEN
 	RESPONSE #100
-        EquipMostDamagingMelee()
-		AttackReevaluate(LastSeenBy(Myself),30)
+        SelectWeaponAbility(SLOT_WEAPON,0)
+		AttackReevaluate(NearestEnemyOf(Myself),30)
 END

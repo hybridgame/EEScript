@@ -105,7 +105,7 @@ IF
 THEN
 	RESPONSE #100
         DisplayStringHead(Myself,%S_MODE_MELEE%)
-		EquipMostDamagingMelee()
+		SelectWeaponAbility(SLOT_WEAPON,0)
 		SetGlobal("ES_MODE","LOCALS",%MODE_MELEE%)
 END
 
