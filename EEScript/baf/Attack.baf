@@ -53,7 +53,7 @@ IF
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 	ActionListEmpty()
 	!InParty(LastSeenBy(Myself))
-	!Allegiance(LastSeenBy(Myself),GOODCUTOFF)
+	Allegiance(LastSeenBy(Myself),ENEMY)
 	!Class(LastSeenBy(Myself),INNOCENT)
 THEN
 	RESPONSE #100
