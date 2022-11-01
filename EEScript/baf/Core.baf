@@ -19,7 +19,6 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_ON%)
-		EquipMostDamagingMelee()
         SelectWeaponAbility(SLOT_WEAPON,0)
 		ClearActions(Myself)
 		Continue()

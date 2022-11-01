@@ -31,7 +31,6 @@ IF
 	!InParty(NearestEnemyOf(Myself))
 THEN
 	RESPONSE #100
-		EquipMostDamagingMelee()
         SelectWeaponAbility(SLOT_WEAPON,0)
 		AttackReevaluate(NearestEnemyOf(Myself),30)
 END
