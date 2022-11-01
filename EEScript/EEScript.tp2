@@ -17,7 +17,6 @@ ACTION_FOR_EACH file IN
     Attack
 BEGIN
     EXTEND_BOTTOM ~EEScript.bcs~ ~EEScript/baf/%file%.baf~
-        SPRINT  S_ATTACKED_BY   "14027"
         SPRINT  S_AI_ON         "14669"
         SPRINT  S_AI_OFF        "14671"
         SPRINT  S_MODE_MELEE    "15529"
