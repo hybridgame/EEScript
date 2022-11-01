@@ -4,5 +4,6 @@ IF
 	    HitBy([GOODCUTOFF],CRUSHING)
 THEN
 	RESPONSE #100
+        DisplayStringHead(Myself,%S_ATTACKED_BY%)
 		PauseGame()
 END
