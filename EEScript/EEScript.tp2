@@ -1,6 +1,6 @@
 BACKUP ~EEScript/backup~
 AUTHOR ~hybridgame~
-VERSION "2022-10-27"
+VERSION "2022-11-02"
 
 BEGIN "EEScript"
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ ~BGEE or BG2EE Required~
@@ -12,6 +12,7 @@ INCLUDE ~EEScript/trap/trap.tph~
 COMPILE ~EEScript/baf/EEScript.baf~
 ACTION_FOR_EACH file IN
     Hotkey
+    Action
     Core
     Attack
 BEGIN
@@ -44,9 +45,6 @@ BEGIN
         SPRINT  COMBAT_ON       "1"
         SPRINT  SHOUT_MOVE      "911"
         SPRINT  SHOUT_TRAP      "912"
-        SPRINT  ENEMY_NONE      "0"
-        SPRINT  ENEMY_WARRIOR   "1"
-        SPRINT  ENEMY_CASTER    "2"
         EVALUATE_BUFFER
 END
 COPY_EXISTING ~override/EEScript.bcs~ ~scripts/EEScript.bs~

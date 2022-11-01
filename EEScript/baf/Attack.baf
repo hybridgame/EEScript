@@ -10,39 +10,15 @@ THEN
 	RESPONSE #100
 END
 
-// 투명화, 그림자 숨기 중에는 공격을 하지 않는다.
-IF
-	OR(2)
-		StateCheck(Myself,STATE_INVISIBLE)
-		ModalState(STEALTH)
-THEN
-	RESPONSE #100
-END
-
 // 주문 시전자부터 공격
 IF
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
-	OR(21)
-		See(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(SecondNearestEnemyOfType([0.0.0.DRUID_ALL]))
-		See(SecondNearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(SecondNearestEnemyOfType([0.0.0.CLERIC_ALL]))
-		See(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(ThirdNearestEnemyOfType([0.0.0.DRUID_ALL]))
-        See(ThirdNearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(ThirdNearestEnemyOfType([0.0.0.CLERIC_ALL]))
-		See(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(FourthNearestEnemyOfType([0.0.0.DRUID_ALL]))
-        See(FourthNearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(FourthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
-		See(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(FifthNearestEnemyOfType([0.0.0.DRUID_ALL]))
-        See(FifthNearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(FifthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
-		See(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-        See(SixthNearestEnemyOfType([0.0.0.DRUID_ALL]))
-        See(SixthNearestEnemyOfType([0.0.0.BARD_ALL]))
-		See(SixthNearestEnemyOfType([0.0.0.CLERIC_ALL]))
+	ActionListEmpty()
+	OR(5)
+		See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+        See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
+		See(NearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
 		See(NearestEnemyOf(Myself))
 	!InParty(LastSeenBy(Myself))
 THEN
@@ -53,9 +29,10 @@ END
 // 거리에 따라 무기 교체하며 공격
 IF
 	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
 	See(NearestEnemyOf(Myself))
 	!InParty(NearestEnemyOf(Myself))
-    !Range(NearestEnemyOf(Myself),8)
+	!Range(NearestEnemyOf(Myself),8)
 	CanEquipRanged()
 THEN
 	RESPONSE #100
@@ -65,10 +42,12 @@ END
 
 IF
 	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
 	See(NearestEnemyOf(Myself))
 	!InParty(NearestEnemyOf(Myself))
 THEN
 	RESPONSE #100
+		EquipMostDamagingMelee()
         SelectWeaponAbility(SLOT_WEAPON,0)
 		AttackReevaluate(NearestEnemyOf(Myself),30)
 END

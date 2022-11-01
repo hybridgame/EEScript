@@ -1,0 +1,109 @@
+///////////////////////////////////////////////////////////////////////////////
+// 전투 여부에 상관없이 항상 하는 행동
+///////////////////////////////////////////////////////////////////////////////
+
+// 턴 언데드
+IF
+	Global("ES_ACT","LOCALS",%ACT_TURN%)
+	!ModalState(TURNUNDEAD)
+THEN
+	RESPONSE #100
+		Turn()
+END
+
+// 바드 송
+IF
+	Global("ES_ACT","LOCALS",%ACT_SONG%)
+	!ModalState(BATTLESONG)
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+// 샤먼 댄스
+IF
+	Global("ES_ACT","LOCALS",%ACT_DANCE%)
+	!ModalState(SHAMANDANCE)
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+// 환상 탐지
+IF
+	Global("ES_ACT","LOCALS",%ACT_DETECT%)
+	!ModalState(DETECTTRAPS)
+THEN
+	RESPONSE #100
+		FindTraps()
+END
+
+// 성역, 샤먼 댄스, 바드 송, 턴 언데드 중이면 스크립트를 중지한다.
+IF
+	OR(5)
+		CheckStatGT(Myself,0,SANCTUARY)
+		Global("ES_ACT","LOCALS",%ACT_TURN%)
+		Global("ES_ACT","LOCALS",%ACT_SONG%)
+		Global("ES_ACT","LOCALS",%ACT_DANCE%)
+		Global("ES_ACT","LOCALS",%ACT_DETECT%)
+THEN
+	RESPONSE #100
+END
+
+///////////////////////////////////////////////////////////////////////////////
+// 적이 없을 때 하는 행동
+///////////////////////////////////////////////////////////////////////////////
+
+// 함정 해제
+IF
+	Heard([ANYTHING],%SHOUT_TRAP%)
+	ActionListEmpty()
+	Class(Myself,THIEF_ALL)
+	!ButtonDisabled(BUTTON_THIEVING)
+	!Detect([ENEMY])
+	Range(LastHeardBy(Myself),8)
+THEN
+	RESPONSE #100
+		RemoveTraps(LastHeardBy(Myself))
+END
+
+// 몽크, 씨프, 샤먼 함정 찾기
+IF
+	Global("ES_ACT","LOCALS",%ACT_FIND%)
+	ActionListEmpty()
+	OR(3)
+		Class(Myself,THIEF_ALL)
+		Class(Myself,MONK)
+        Class(Myself,SHAMAN)
+    !Detect([ENEMY])
+	!ModalState(DETECTTRAPS)
+THEN
+	RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		FindTraps()
+END
+
+// 레인저, 몽크, 씨프 그림자 숨기
+IF
+	Global("ES_ACT","LOCALS",%ACT_HIDE%)
+	ActionListEmpty()
+	!GlobalTimerNotExpired("EC#HIDE","LOCALS")
+	!ButtonDisabled(BUTTON_STEALTH)
+	!Detect([ENEMY])
+	!ModalState(STEALTH)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("EC#HIDE","LOCALS",ONE_ROUND)
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		Hide()
+END
+
+// 전투가 끝난 후 처리를 한다.
+IF
+    Global("ES_COMBAT","LOCALS",%COMBAT_ON%)
+	CombatCounter(0)
+THEN
+    RESPONSE #100
+		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		Continue()
+END
