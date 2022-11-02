@@ -120,7 +120,7 @@ IF
 	WeaponCanDamage(NearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(NearestEnemyOf(Myself),30)
 END
 
@@ -134,7 +134,7 @@ IF
 	WeaponCanDamage(SecondNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(SecondNearestEnemyOf(Myself),30)
 END
 
@@ -148,7 +148,7 @@ IF
 	WeaponCanDamage(ThirdNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(ThirdNearestEnemyOf(Myself),30)
 END
 
@@ -162,7 +162,7 @@ IF
 	WeaponCanDamage(FourthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(FourthNearestEnemyOf(Myself),30)
 END
 
@@ -176,7 +176,7 @@ IF
 	WeaponCanDamage(FifthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(FifthNearestEnemyOf(Myself),30)
 END
 
@@ -190,7 +190,7 @@ IF
 	WeaponCanDamage(SixthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,1)
+        SelectWeaponAbility(SLOT_WEAPON0,0)
 		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
 END
 

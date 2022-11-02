@@ -103,7 +103,7 @@ IF
 THEN
 	RESPONSE #100
         DisplayStringHead(Myself,%S_MODE_MELEE%)
-		SelectWeaponAbility(SLOT_WEAPON,1)
+		SelectWeaponAbility(SLOT_WEAPON0,0)
 		SetGlobal("ES_MODE","LOCALS",%MODE_MELEE%)
 END
 
