@@ -18,3 +18,20 @@ THEN
         SetGlobal("ES_HIDE","LOCALS",0)
         SetGlobal("ES_MOVETIMER","LOCALS",0)
 END
+
+///////////////////////////////////////////////////////////////////////////////
+// 동료에게 공격당하면 도망친다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	ActionListEmpty()
+	OR(3)
+		AttackedBy([GOODCUTOFF],DEFAULT)
+		AttackedBy([GOODBUTRED],DEFAULT)
+		AttackedBy([EVILBUTGREEN],DEFAULT)
+	See(LastAttackerOf(Myself))
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,14027)	// 피해 입음
+		RunAwayFrom(LastAttackerOf(Myself),90)
+END

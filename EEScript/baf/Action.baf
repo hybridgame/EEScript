@@ -96,7 +96,7 @@ THEN
 		Hide()
 END
 
-// 투명화, 그림자 숨기 중에는 적을 확인까지만 하고 스크립트를 정지한다.
+// 투명화, 그림자 숨기 중에는 스크립트를 중지한다.
 IF
 	OR(2)
 		StateCheck(Myself,STATE_INVISIBLE)
