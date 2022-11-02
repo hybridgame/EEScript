@@ -1,0 +1,69 @@
+///////////////////////////////////////////////////////////////////////////////
+// 전투중인데 적이 보이지 않으면 적을 보고있는 파티원에게 이동한다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P1SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P2SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player2)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P3SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player3)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P4SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player4)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P5SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player5)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END
+
+IF
+    ActionListEmpty()
+    !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
+	!See(NearestEnemyOf(Myself))
+	Global("ES_P6SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player6)
+        SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+END

@@ -1,0 +1,152 @@
+///////////////////////////////////////////////////////////////////////////////
+// 적을 본다.
+///////////////////////////////////////////////////////////////////////////////
+
+IF
+	InPartySlot(Myself,0)
+	Global("ES_P1SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P1SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,0)
+	Global("ES_P1SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P1SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	InPartySlot(Myself,1)
+	Global("ES_P2SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P2SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,1)
+	Global("ES_P2SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P2SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	InPartySlot(Myself,2)
+	Global("ES_P3SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P3SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,2)
+	Global("ES_P3SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P3SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	InPartySlot(Myself,3)
+	Global("ES_P4SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P4SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,3)
+	Global("ES_P4SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P4SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	InPartySlot(Myself,4)
+	Global("ES_P5SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P5SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,4)
+	Global("ES_P5SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P5SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	InPartySlot(Myself,5)
+	Global("ES_P6SEE","GLOBAL",1)
+	!See([EVILCUTOFF])
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P6SEE","GLOBAL",0)
+		Continue()
+END
+IF
+	InPartySlot(Myself,5)
+	Global("ES_P6SEE","GLOBAL",0)
+	OR(2)
+		See([EVILCUTOFF])
+		See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("ES_P6SEE","GLOBAL",1)
+        ClearActions(Myself)
+		Continue()
+END
+
+IF
+	!Global("ES_P1SEE","GLOBAL",1)
+	!Global("ES_P2SEE","GLOBAL",1)
+	!Global("ES_P3SEE","GLOBAL",1)
+	!Global("ES_P4SEE","GLOBAL",1)
+	!Global("ES_P5SEE","GLOBAL",1)
+	!Global("ES_P6SEE","GLOBAL",1)
+THEN
+	RESPONSE #100
+END

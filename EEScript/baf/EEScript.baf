@@ -1,9 +1,20 @@
 IF
-    OR(2)
-        AttackedBy([GOODCUTOFF],DEFAULT)
-	    HitBy([GOODCUTOFF],CRUSHING)
+    CombatCounter(0)
+    OR(6)
+	    Global("ES_P1SEE","GLOBAL",1)
+	    Global("ES_P2SEE","GLOBAL",1)
+	    Global("ES_P3SEE","GLOBAL",1)
+	    Global("ES_P4SEE","GLOBAL",1)
+	    Global("ES_P5SEE","GLOBAL",1)
+	    Global("ES_P6SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-        DisplayStringHead(Myself,14027) // 피해 입음
-		PauseGame()
+	    SetGlobal("ES_P1SEE","GLOBAL",0)
+	    SetGlobal("ES_P2SEE","GLOBAL",0)
+	    SetGlobal("ES_P3SEE","GLOBAL",0)
+	    SetGlobal("ES_P4SEE","GLOBAL",0)
+	    SetGlobal("ES_P5SEE","GLOBAL",0)
+	    SetGlobal("ES_P6SEE","GLOBAL",0)
+        SetGlobal("ES_HIDE","LOCALS",0)
+        SetGlobal("ES_MOVETIMER","LOCALS",0)
 END

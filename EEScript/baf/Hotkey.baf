@@ -7,7 +7,6 @@ IF
 	Global("ES_AI","LOCALS",%AI_ON%)
 THEN
 	RESPONSE #100
-		SetGlobalTimer("EC#HIDE","LOCALS",1)
 		DisplayStringHead(Myself,%S_AI_ON%)
 		Continue()
 END
@@ -17,7 +16,6 @@ IF
 	Global("ES_AI","LOCALS",%AI_OFF%)
 THEN
 	RESPONSE #100
-		SetGlobalTimer("EC#HIDE","LOCALS",1)
 		DisplayStringHead(Myself,%S_AI_OFF%)
 		Continue()
 END
@@ -105,7 +103,7 @@ IF
 THEN
 	RESPONSE #100
         DisplayStringHead(Myself,%S_MODE_MELEE%)
-		SelectWeaponAbility(SLOT_WEAPON,0)
+		SelectWeaponAbility(SLOT_WEAPON,1)
 		SetGlobal("ES_MODE","LOCALS",%MODE_MELEE%)
 END
 

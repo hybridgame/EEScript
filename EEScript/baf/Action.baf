@@ -79,7 +79,6 @@ IF
 	!ModalState(DETECTTRAPS)
 THEN
 	RESPONSE #100
-		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
 		FindTraps()
 END
 
@@ -87,23 +86,21 @@ END
 IF
 	Global("ES_ACT","LOCALS",%ACT_HIDE%)
 	ActionListEmpty()
-	!GlobalTimerNotExpired("EC#HIDE","LOCALS")
+	!GlobalTimerNotExpired("ES_HIDE","LOCALS")
 	!ButtonDisabled(BUTTON_STEALTH)
 	!Detect([ENEMY])
 	!ModalState(STEALTH)
 THEN
 	RESPONSE #100
-		SetGlobalTimer("EC#HIDE","LOCALS",ONE_ROUND)
-		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
+		SetGlobalTimer("ES_HIDE","LOCALS",ONE_ROUND)
 		Hide()
 END
 
-// 전투가 끝난 후 처리를 한다.
+// 투명화, 그림자 숨기 중에는 적을 확인까지만 하고 스크립트를 정지한다.
 IF
-    Global("ES_COMBAT","LOCALS",%COMBAT_ON%)
-	CombatCounter(0)
+	OR(2)
+		StateCheck(Myself,STATE_INVISIBLE)
+		ModalState(STEALTH)
 THEN
-    RESPONSE #100
-		SetGlobal("ES_COMBAT","LOCALS",%COMBAT_OFF%)
-		Continue()
+	RESPONSE #100
 END

@@ -13,7 +13,8 @@ COMPILE ~EEScript/baf/EEScript.baf~
 ACTION_FOR_EACH file IN
     Hotkey
     Action
-    Core
+    SeeEnemy
+    Move
     Attack
 BEGIN
     EXTEND_BOTTOM ~EEScript.bcs~ ~EEScript/baf/%file%.baf~
@@ -41,9 +42,6 @@ BEGIN
         SPRINT  ACT_SONG        "3"
         SPRINT  ACT_DANCE       "4"
         SPRINT  ACT_DETECT      "5"
-        SPRINT  COMBAT_OFF      "0"
-        SPRINT  COMBAT_ON       "1"
-        SPRINT  SHOUT_MOVE      "911"
         SPRINT  SHOUT_TRAP      "912"
         EVALUATE_BUFFER
 END

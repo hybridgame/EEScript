@@ -10,13 +10,17 @@ THEN
 	RESPONSE #100
 END
 
-// 거리에 따라 무기 교체하며 공격
+// 원거리 공격
+
 IF
 	Global("ES_MODE","LOCALS",%MODE_MIXED%)
 	ActionListEmpty()
 	See(NearestEnemyOf(Myself))
-	!InParty(NearestEnemyOf(Myself))
 	!Range(NearestEnemyOf(Myself),8)
+	!InParty(NearestEnemyOf(Myself))
+	!Allegiance(NearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(NearestEnemyOf(Myself),MAINHAND)
 	CanEquipRanged()
 THEN
 	RESPONSE #100
@@ -27,35 +31,450 @@ END
 IF
 	Global("ES_MODE","LOCALS",%MODE_MIXED%)
 	ActionListEmpty()
-	See(NearestEnemyOf(Myself))
-	!InParty(NearestEnemyOf(Myself))
+	See(SecondNearestEnemyOf(Myself))
+	!Range(SecondNearestEnemyOf(Myself),8)
+	!InParty(SecondNearestEnemyOf(Myself))
+	!Allegiance(SecondNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOf(Myself),MAINHAND)
+	CanEquipRanged()
 THEN
 	RESPONSE #100
-        SelectWeaponAbility(SLOT_WEAPON,0)
+        EquipRanged()
+		AttackReevaluate(SecondNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOf(Myself))
+	!Range(ThirdNearestEnemyOf(Myself),8)
+	!InParty(ThirdNearestEnemyOf(Myself))
+	!Allegiance(ThirdNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOf(Myself),MAINHAND)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        EquipRanged()
+		AttackReevaluate(ThirdNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FourthNearestEnemyOf(Myself))
+	!Range(FourthNearestEnemyOf(Myself),8)
+	!InParty(FourthNearestEnemyOf(Myself))
+	!Allegiance(FourthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FourthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FourthNearestEnemyOf(Myself),MAINHAND)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        EquipRanged()
+		AttackReevaluate(FourthNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FifthNearestEnemyOf(Myself))
+	!Range(FifthNearestEnemyOf(Myself),8)
+	!InParty(FifthNearestEnemyOf(Myself))
+	!Allegiance(FifthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FifthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FifthNearestEnemyOf(Myself),MAINHAND)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        EquipRanged()
+		AttackReevaluate(FifthNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SixthNearestEnemyOf(Myself))
+	!Range(SixthNearestEnemyOf(Myself),8)
+	!InParty(SixthNearestEnemyOf(Myself))
+	!Allegiance(SixthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SixthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SixthNearestEnemyOf(Myself),MAINHAND)
+	CanEquipRanged()
+THEN
+	RESPONSE #100
+        EquipRanged()
+		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
+END
+
+// 근거리 공격
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	!InParty(NearestEnemyOf(Myself))
+	!Allegiance(NearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(NearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
 		AttackReevaluate(NearestEnemyOf(Myself),30)
 END
 
-// 주문 시전자부터 공격
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOf(Myself))
+	!InParty(SecondNearestEnemyOf(Myself))
+	!Allegiance(SecondNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
+		AttackReevaluate(SecondNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOf(Myself))
+	!InParty(ThirdNearestEnemyOf(Myself))
+	!Allegiance(ThirdNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
+		AttackReevaluate(ThirdNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FourthNearestEnemyOf(Myself))
+	!InParty(FourthNearestEnemyOf(Myself))
+	!Allegiance(FourthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FourthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FourthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
+		AttackReevaluate(FourthNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FifthNearestEnemyOf(Myself))
+	!InParty(FifthNearestEnemyOf(Myself))
+	!Allegiance(FifthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FifthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FifthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
+		AttackReevaluate(FifthNearestEnemyOf(Myself),30)
+END
+
+IF
+	Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SixthNearestEnemyOf(Myself))
+	!InParty(SixthNearestEnemyOf(Myself))
+	!Allegiance(SixthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SixthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SixthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+        SelectWeaponAbility(SLOT_WEAPON,1)
+		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
+END
+
+// 소서러 공격
+
 IF
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 	ActionListEmpty()
-	!See(NearestEnemyOfType([0.0.0.SORCERER]))
-	!See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
-	!See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
-	!See(NearestEnemyOfType([0.0.0.BARD_ALL]))
-	!See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
-	!See(NearestEnemyOf(Myself))
+	See(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!InParty(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!Allegiance(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
+	WeaponCanDamage(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
 THEN
 	RESPONSE #100
+		AttackReevaluate(NearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),30)
 END
 
 IF
 	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
 	ActionListEmpty()
-	!InParty(LastSeenBy(Myself))
-	Allegiance(LastSeenBy(Myself),ENEMY)
-	!Class(LastSeenBy(Myself),INNOCENT)
+	See(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!InParty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!Allegiance(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(SecondNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!InParty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]))
+	!Allegiance(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.SORCERER]),30)
+END
+
+// 메이지 공격
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!InParty(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!Allegiance(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+	WeaponCanDamage(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!InParty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!Allegiance(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!InParty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	!Allegiance(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),30)
+END
+
+// 드루이드 공격
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!InParty(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!Allegiance(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+	WeaponCanDamage(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!InParty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!Allegiance(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SecondNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!InParty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]))
+	!Allegiance(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.DRUID_ALL]),30)
+END
+
+// 클레릭 공격
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!InParty(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!Allegiance(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+	WeaponCanDamage(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!InParty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!Allegiance(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SecondNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!InParty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]))
+	!Allegiance(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.CLERIC_ALL]),30)
+END
+
+// 바드 공격
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!InParty(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!Allegiance(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+	WeaponCanDamage(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!InParty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!Allegiance(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!InParty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]))
+	!Allegiance(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD_ALL]),30)
+END
+
+// 공격
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	!InParty(NearestEnemyOf(Myself))
+	!Allegiance(NearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(NearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(NearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOf(Myself),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SecondNearestEnemyOf(Myself))
+	!InParty(SecondNearestEnemyOf(Myself))
+	!Allegiance(SecondNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SecondNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SecondNearestEnemyOf(Myself),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOf(Myself))
+	!InParty(ThirdNearestEnemyOf(Myself))
+	!Allegiance(ThirdNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(ThirdNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(ThirdNearestEnemyOf(Myself),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FourthNearestEnemyOf(Myself))
+	!InParty(FourthNearestEnemyOf(Myself))
+	!Allegiance(FourthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FourthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FourthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(FourthNearestEnemyOf(Myself),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(FifthNearestEnemyOf(Myself))
+	!InParty(FifthNearestEnemyOf(Myself))
+	!Allegiance(FifthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(FifthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FifthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(FifthNearestEnemyOf(Myself),30)
+END
+
+IF
+	!Global("ES_MODE","LOCALS",%MODE_MIXED%)
+	ActionListEmpty()
+	See(SixthNearestEnemyOf(Myself))
+	!InParty(SixthNearestEnemyOf(Myself))
+	!Allegiance(SixthNearestEnemyOf(Myself),GOODCUTOFF)
+	WeaponEffectiveVs(SixthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SixthNearestEnemyOf(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
 END
