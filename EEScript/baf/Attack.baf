@@ -478,3 +478,15 @@ THEN
 	RESPONSE #100
 		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
 END
+
+// 무조건 공격
+
+IF
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	!InParty(NearestEnemyOf(Myself))
+	!Allegiance(NearestEnemyOf(Myself),GOODCUTOFF)
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOf(Myself),30)
+END
