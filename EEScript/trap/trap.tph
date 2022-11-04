@@ -116,7 +116,7 @@ BEGIN
     BEGIN
         ACTION_IF FILE_EXISTS_IN_GAME ~%file%.bcs~ THEN
         BEGIN
-            EXTEND_TOP ~%file%.bcs~ ~EEScript/trap/trap.baf~
+            EXTEND_TOP ~%file%.bcs~ ~%MOD%/trap/trap.baf~
                 SPRINT  BCS             ~%file%~
                 SPRINT  SHOUT_TRAP      "912"
                 EVALUATE_BUFFER
@@ -244,7 +244,7 @@ BEGIN
     BEGIN
         ACTION_IF FILE_EXISTS_IN_GAME ~%file%.bcs~ THEN
         BEGIN
-            EXTEND_TOP ~%file%.bcs~ ~EEScript/trap/trap.baf~
+            EXTEND_TOP ~%file%.bcs~ ~%MOD%/trap/trap.baf~
                 SPRINT  BCS             ~%file%~
                 SPRINT  SHOUT_TRAP      "912"
                 EVALUATE_BUFFER

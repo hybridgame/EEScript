@@ -5,11 +5,13 @@ VERSION "2022-11-03"
 BEGIN "EEScript"
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ ~BGEE or BG2EE Required~
 
+OUTER_SPRINT MOD "EEScript"
+
 // Disarm trap automatically
-INCLUDE ~EEScript/trap/trap.tph~
+INCLUDE ~%MOD%/trap/trap.tph~
 
 // EEScript
-COMPILE ~EEScript/baf/EEScript.baf~
+COMPILE ~%MOD%/baf/%MOD%.baf~
 ACTION_FOR_EACH file IN
     Hotkey
     Action
@@ -17,7 +19,7 @@ ACTION_FOR_EACH file IN
     Move
     Attack
 BEGIN
-    EXTEND_BOTTOM ~EEScript.bcs~ ~EEScript/baf/%file%.baf~
+    EXTEND_BOTTOM ~%MOD%.bcs~ ~%MOD%/baf/%file%.baf~
         SPRINT  S_AI_ON         "14669"
         SPRINT  S_AI_OFF        "14671"
         SPRINT  S_MODE_MELEE    "15529"
@@ -45,4 +47,4 @@ BEGIN
         SPRINT  SHOUT_TRAP      "912"
         EVALUATE_BUFFER
 END
-COPY_EXISTING ~override/EEScript.bcs~ ~scripts/EEScript.bs~
+COPY_EXISTING ~override/%MOD%.bcs~ ~scripts/%MOD%.bs~
