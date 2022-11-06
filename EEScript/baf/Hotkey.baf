@@ -8,6 +8,8 @@ IF
 THEN
 	RESPONSE #100
 		DisplayStringHead(Myself,%S_AI_ON%)
+		SetGlobal("ES_HIDETIMER","LOCALS",0)
+        SetGlobal("ES_MOVETIMER","LOCALS",0)
 		Continue()
 END
 
@@ -17,6 +19,8 @@ IF
 THEN
 	RESPONSE #100
 		DisplayStringHead(Myself,%S_AI_OFF%)
+		SetGlobal("ES_HIDETIMER","LOCALS",0)
+        SetGlobal("ES_MOVETIMER","LOCALS",0)
 		Continue()
 END
 
@@ -27,6 +31,8 @@ IF
 THEN
 	RESPONSE #100
         DisplayStringHead(Myself,%S_MODE_DISABLE%)
+		SetGlobal("ES_HIDETIMER","LOCALS",0)
+        SetGlobal("ES_MOVETIMER","LOCALS",0)
 		Continue()
 END
 
