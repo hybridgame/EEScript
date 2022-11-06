@@ -4,66 +4,78 @@
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P1SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player1)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player1)
 END
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P2SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player2)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player2)
 END
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P3SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player3)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player3)
 END
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P4SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player4)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player4)
 END
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P5SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player5)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player5)
 END
 
 IF
     ActionListEmpty()
+	Global("ES_MOVE","LOCAL",0)
     !GlobalTimerNotExpired("ES_MOVETIMER","LOCALS")
 	!See(NearestEnemyOf(Myself))
 	Global("ES_P6SEE","GLOBAL",1)
 THEN
 	RESPONSE #100
-		MoveToObject(Player6)
+		SetGlobal("ES_MOVE","LOCAL",1)
         SetGlobalTimer("ES_MOVETIMER","LOCALS",ONE_ROUND)
+		MoveToObject(Player6)
 END

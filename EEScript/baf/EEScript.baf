@@ -15,8 +15,10 @@ THEN
 	    SetGlobal("ES_P4SEE","GLOBAL",0)
 	    SetGlobal("ES_P5SEE","GLOBAL",0)
 	    SetGlobal("ES_P6SEE","GLOBAL",0)
-        SetGlobal("ES_HIDE","LOCALS",0)
+        SetGlobal("ES_HIDETIMER","LOCALS",0)
         SetGlobal("ES_MOVETIMER","LOCALS",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
+		Continue()
 END
 
 ///////////////////////////////////////////////////////////////////////////////

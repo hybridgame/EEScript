@@ -86,13 +86,13 @@ END
 IF
 	Global("ES_ACT","LOCALS",%ACT_HIDE%)
 	ActionListEmpty()
-	!GlobalTimerNotExpired("ES_HIDE","LOCALS")
+	!GlobalTimerNotExpired("ES_HIDETIMER","LOCALS")
 	!ButtonDisabled(BUTTON_STEALTH)
 	!Detect([ENEMY])
 	!ModalState(STEALTH)
 THEN
 	RESPONSE #100
-		SetGlobalTimer("ES_HIDE","LOCALS",ONE_ROUND)
+		SetGlobalTimer("ES_HIDETIMER","LOCALS",ONE_ROUND)
 		Hide()
 END
 

@@ -488,5 +488,5 @@ IF
 	!Allegiance(NearestEnemyOf(Myself),GOODCUTOFF)
 THEN
 	RESPONSE #100
-		AttackReevaluate(NearestEnemyOf(Myself),30)
+		AttackOneRound(NearestEnemyOf(Myself))
 END
