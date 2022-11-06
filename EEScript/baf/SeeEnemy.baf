@@ -153,7 +153,7 @@ IF
 	!Global("ES_P4SEE","GLOBAL",1)
 	!Global("ES_P5SEE","GLOBAL",1)
 	!Global("ES_P6SEE","GLOBAL",1)
-	SetGlobal("ES_MOVE","LOCAL",1)
+	Global("ES_MOVE","LOCAL",1)
 THEN
 	RESPONSE #100
 		SetGlobal("ES_MOVE","LOCAL",0)
