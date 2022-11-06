@@ -41,7 +41,7 @@ END
 // 성역, 샤먼 댄스, 바드 송, 턴 언데드 중이면 스크립트를 중지한다.
 IF
 	OR(5)
-		CheckStatGT(Myself,0,SANCTUARY)
+		!CheckStat(Myself,0,SANCTUARY)
 		Global("ES_ACT","LOCALS",%ACT_TURN%)
 		Global("ES_ACT","LOCALS",%ACT_SONG%)
 		Global("ES_ACT","LOCALS",%ACT_DANCE%)
@@ -90,9 +90,24 @@ IF
 	!ButtonDisabled(BUTTON_STEALTH)
 	!Detect([ENEMY])
 	!ModalState(STEALTH)
+	!StateCheck(Myself,STATE_HASTED)
 THEN
 	RESPONSE #100
 		SetGlobalTimer("ES_HIDETIMER","LOCALS",ONE_ROUND)
+		Hide()
+END
+
+IF
+	Global("ES_ACT","LOCALS",%ACT_HIDE%)
+	ActionListEmpty()
+	!GlobalTimerNotExpired("ES_HIDETIMER","LOCALS")
+	!ButtonDisabled(BUTTON_STEALTH)
+	!Detect([ENEMY])
+	!ModalState(STEALTH)
+	StateCheck(Myself,STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("ES_HIDETIMER","LOCALS",3)
 		Hide()
 END
 
