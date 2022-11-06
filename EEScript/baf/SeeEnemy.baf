@@ -21,7 +21,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P1SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -45,7 +45,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P2SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -69,7 +69,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P3SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -93,7 +93,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P4SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -117,7 +117,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P5SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -141,7 +141,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("ES_P6SEE","GLOBAL",1)
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 		Continue()
 END
@@ -153,10 +153,10 @@ IF
 	!Global("ES_P4SEE","GLOBAL",1)
 	!Global("ES_P5SEE","GLOBAL",1)
 	!Global("ES_P6SEE","GLOBAL",1)
-	Global("ES_MOVE","LOCAL",1)
+	Global("ES_MOVE","LOCALS",1)
 THEN
 	RESPONSE #100
-		SetGlobal("ES_MOVE","LOCAL",0)
+		SetGlobal("ES_MOVE","LOCALS",0)
         ClearActions(Myself)
 END
 
