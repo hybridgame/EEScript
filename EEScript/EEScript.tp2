@@ -1,6 +1,6 @@
 BACKUP ~EEScript/backup~
 AUTHOR ~hybridgame~
-VERSION "2022-11-03"
+VERSION "2022-11-07"
 
 BEGIN "EEScript"
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ ~BGEE or BG2EE Required~
